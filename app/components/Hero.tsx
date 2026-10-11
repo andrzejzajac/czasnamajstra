@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { PICK_SERVICE_EVENT } from "./Services";
 
 function UploadIcon() {
   return (
@@ -68,6 +69,24 @@ export default function Hero() {
     if (fieldRef.current) fieldRef.current.focus();
     else document.getElementById("hero-title")?.focus();
   }, [step]);
+
+  // вибір категорії в блоці «Usługi» — повертаємо на перший крок із підставленим текстом
+  useEffect(() => {
+    const onPick = (e: Event) => {
+      const label = (e as CustomEvent<string>).detail;
+      setProblem(`${label}: `);
+      setStep(0);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setTimeout(() => {
+        const input = fieldRef.current;
+        if (!input) return;
+        input.focus({ preventScroll: true });
+        input.setSelectionRange(input.value.length, input.value.length);
+      }, 50);
+    };
+    window.addEventListener(PICK_SERVICE_EVENT, onPick);
+    return () => window.removeEventListener(PICK_SERVICE_EVENT, onPick);
+  }, []);
 
   const previews = useMemo(
     () =>

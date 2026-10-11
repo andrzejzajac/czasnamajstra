@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Payment from "./components/Payment";
 import Pricing from "./components/Pricing";
+import Services from "./components/Services";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Header />
       <main id="main">
         <Hero />
+        <Services />
         <Pricing />
         <Payment />
       </main>

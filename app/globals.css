@@ -149,7 +149,7 @@ main {
 /* ---------- Hero ---------- */
 
 .hero {
-  margin-bottom: 72px;
+  margin-bottom: 0;
   background: var(--tint);
   color: var(--ink);
 }
@@ -387,9 +387,6 @@ main {
     padding-bottom: 40px;
   }
 
-  .hero {
-    margin-bottom: 40px;
-  }
 
   .hero-block {
     aspect-ratio: auto;
@@ -430,6 +427,112 @@ main {
 
   .hero-submit {
     padding: 0 16px;
+    font-size: 14px;
+  }
+}
+
+/* ---------- Services ---------- */
+
+.services {
+  margin-bottom: 72px;
+  padding: 72px 0;
+  background: var(--ink);
+  color: #fff;
+}
+
+.services-inner {
+  max-width: 1075px;
+  margin: 0 auto;
+}
+
+.services-title {
+  margin: 0 0 48px;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.service-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+}
+
+.service-label {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+}
+
+@media (max-width: 1107px) {
+  .services-inner {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .services-title {
+    margin-bottom: 32px;
+  }
+
+  /* 3 в ряд, неповний останній ряд — по центру */
+  .services-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px 0;
+  }
+
+  .services-list > li {
+    width: 33.333%;
+    padding: 0 4px;
+  }
+}
+
+@media (max-width: 640px) {
+  .services {
+    margin-bottom: 40px;
+    padding: 48px 0;
+  }
+
+  .services-list {
+    row-gap: 24px;
+  }
+
+  .service-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .service-label {
     font-size: 14px;
   }
 }
@@ -562,11 +665,11 @@ main {
 /* ---------- Footer ---------- */
 
 .footer {
-  /* чорний футер — свої кольори тексту й ліній */
-  --footer-muted: #8a8f98;
+  /* темний футер (як блок «Usługi») — свої кольори тексту й ліній */
+  --footer-muted: #9aa5b5;
   --footer-line: rgba(255, 255, 255, 0.14);
-  --footer-chip: #1a1a1a;
-  background: #000;
+  --footer-chip: rgba(255, 255, 255, 0.08);
+  background: var(--ink);
   color: #fff;
 }
 
