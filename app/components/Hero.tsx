@@ -2,6 +2,18 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { PICK_SERVICE_EVENT } from "./Services";
+import TypedWord from "./TypedWord";
+
+// слова, що по черзі друкуються в заголовку замість «naprawić»
+const TYPED_WORDS = [
+  "naprawić",
+  "zamontować",
+  "złożyć",
+  "pomalować",
+  "przykręcić",
+  "powiesić",
+  "wymienić",
+];
 
 function UploadIcon() {
   return (
@@ -133,8 +145,12 @@ export default function Hero() {
       <div className="hero-block">
         {step === 0 && (
           <>
-            <h1 id="hero-title" className="hero-title">
-              Opisz, co trzeba naprawić
+            <h1
+              id="hero-title"
+              className="hero-title"
+              aria-label="Opisz, co trzeba naprawić"
+            >
+              Opisz, co trzeba <TypedWord words={TYPED_WORDS} />
             </h1>
             <form
               className="hero-form"

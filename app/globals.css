@@ -176,6 +176,36 @@ main {
   text-wrap: balance;
 }
 
+/* слово, що друкується в заголовку */
+.typed {
+  display: inline-grid;
+  text-align: left;
+}
+
+.typed > * {
+  grid-area: 1 / 1;
+}
+
+.typed-sizer {
+  visibility: hidden;
+}
+
+.typed-caret {
+  display: inline-block;
+  width: 0.06em;
+  height: 0.85em;
+  margin-left: 0.04em;
+  background: currentColor;
+  vertical-align: -0.05em;
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 .hero-form {
   display: flex;
   align-items: center;
@@ -396,6 +426,11 @@ main {
   .hero-title {
     font-size: 36px;
     line-height: 1.05;
+  }
+
+  /* на телефоні слово стоїть окремим рядком — по центру */
+  .typed {
+    text-align: center;
   }
 
   .hero-form {
