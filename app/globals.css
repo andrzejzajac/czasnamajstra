@@ -206,6 +206,18 @@ main {
   }
 }
 
+/* на широкому екрані рядок вміщається завжди, тож місце під найдовше слово
+   не резервуємо — заголовок завжди стоїть рівно по центру */
+@media (min-width: 1024px) {
+  .typed {
+    display: inline;
+  }
+
+  .typed-sizer {
+    display: none;
+  }
+}
+
 .hero-form {
   display: flex;
   align-items: center;
