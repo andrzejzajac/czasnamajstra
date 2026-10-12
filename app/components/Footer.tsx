@@ -23,7 +23,6 @@ export default function Footer() {
           </div>
 
           <nav className="footer-col" aria-label="Меню у футері">
-            <span className="footer-label">Menu</span>
             {links.map((link) => (
               <a key={link.href} href={link.href} className="footer-link">
                 {link.label}
@@ -32,7 +31,6 @@ export default function Footer() {
           </nav>
 
           <div className="footer-col">
-            <span className="footer-label">Kontakt</span>
             <a href={PHONE_HREF} className="footer-link">
               {PHONE}
             </a>

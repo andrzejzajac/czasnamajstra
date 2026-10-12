@@ -1,14 +1,22 @@
 "use client";
 
+import Image, { type StaticImageData } from "next/image";
+import drobneNaprawyImage from "../../public/services/drobne-naprawy.png";
+import kameryImage from "../../public/services/kamery.webp";
+import skladanieMebliImage from "../../public/services/skladanie-mebli.png";
+
 export const PICK_SERVICE_EVENT = "pick-service";
 
-// TODO: замінити кольорові кружечки на картинки категорій
-const services = [
-  { label: "Drobne naprawy", color: "#ffce32" },
-  { label: "Składanie mebli", color: "#3a77ff" },
-  { label: "Kamery", color: "#23e5db" },
-  { label: "Komputery", color: "#ff5636" },
-  { label: "Umeblowanie", color: "#ffd6c9" },
+// zoom — збільшення картинки всередині кружечка, якщо на ній багато порожнього місця
+const services: {
+  label: string;
+  color: string;
+  image?: StaticImageData;
+  zoom?: number;
+}[] = [
+  { label: "Drobne naprawy", color: "#ff5636", image: drobneNaprawyImage, zoom: 1.45 },
+  { label: "Składanie mebli", color: "#3a77ff", image: skladanieMebliImage, zoom: 1.15 },
+  { label: "Kamery", color: "#ffce32", image: kameryImage },
 ];
 
 export default function Services() {
@@ -31,7 +39,17 @@ export default function Services() {
                   className="service-icon"
                   style={{ background: s.color }}
                   aria-hidden="true"
-                />
+                >
+                  {s.image && (
+                    <Image
+                      src={s.image}
+                      alt=""
+                      sizes="140px"
+                      className="service-image"
+                      style={s.zoom ? { transform: `scale(${s.zoom})` } : undefined}
+                    />
+                  )}
+                </span>
                 <span className="service-label">{s.label}</span>
               </button>
             </li>

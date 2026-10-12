@@ -1,11 +1,12 @@
 :root {
-  --tint: #e4e7ea;        /* сірий — фон hero */
-  --accent: #ff3737;      /* червоний інструментальний — кнопки */
-  --accent-hover: #f02424;
+  /* нейтральна палітра: білий, сірі й темний текст; червоний — тільки кнопки */
+  --tint: #e8e8e8;        /* сірий — фон hero */
+  --accent: #ff3737;      /* червоний — кнопки */
+  --accent-hover: #e82a2a;
   --accent-text: #ffffff;
-  --ink: #1e2a3a;         /* основний текст */
-  --muted: #5d6878;
-  --bg: #f2f4f5;          /* холодний світлий фон */
+  --ink: #1c1c1c;         /* основний текст */
+  --muted: #6b6b6b;
+  --bg: #f4f4f4;          /* світлий сірий фон сторінки */
   --surface: #ffffff;
 }
 
@@ -161,9 +162,8 @@ main {
   justify-content: center;
   gap: 40px;
   max-width: 1075px;
-  aspect-ratio: 16 / 9;
   margin: 0 auto;
-  padding: 48px;
+  padding: 96px 48px;
   text-align: center;
 }
 
@@ -241,7 +241,7 @@ main {
   padding: 0;
   border: 0;
   border-radius: 0;
-  background: #000;
+  background: var(--ink);
   color: #fff;
   font-size: 22px;
   line-height: 1;
@@ -249,7 +249,7 @@ main {
 }
 
 .hero-back:hover {
-  background: #333;
+  background: #3a3a3a;
 }
 
 .hero-submit:disabled {
@@ -389,7 +389,6 @@ main {
 
 
   .hero-block {
-    aspect-ratio: auto;
     gap: 28px;
     padding: 64px 0 72px;
   }
@@ -436,8 +435,8 @@ main {
 .services {
   margin-bottom: 72px;
   padding: 72px 0;
-  background: var(--ink);
-  color: #fff;
+  background: var(--surface);
+  color: var(--ink);
 }
 
 .services-inner {
@@ -456,9 +455,10 @@ main {
 
 .services-list {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
-  margin: 0;
+  max-width: 720px;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
 }
@@ -482,7 +482,14 @@ main {
   justify-content: center;
   width: 104px;
   height: 104px;
+  overflow: hidden;
   border-radius: 50%;
+}
+
+.service-image {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
 }
 
 .service-label {
@@ -665,12 +672,11 @@ main {
 /* ---------- Footer ---------- */
 
 .footer {
-  /* темний футер (як блок «Usługi») — свої кольори тексту й ліній */
-  --footer-muted: #9aa5b5;
-  --footer-line: rgba(255, 255, 255, 0.14);
-  --footer-chip: rgba(255, 255, 255, 0.08);
-  background: var(--ink);
-  color: #fff;
+  --footer-muted: var(--muted);
+  --footer-line: #e3e3e3;
+  --footer-chip: var(--bg);
+  background: var(--surface);
+  color: var(--ink);
 }
 
 .footer-inner {
@@ -712,7 +718,7 @@ main {
   width: 40px;
   height: 40px;
   background: var(--footer-chip);
-  color: #fff;
+  color: var(--ink);
   transition: background 0.15s, color 0.15s;
 }
 
@@ -731,15 +737,6 @@ main {
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-}
-
-.footer-label {
-  margin-bottom: 4px;
-  color: var(--footer-muted);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
 }
 
 .footer-link {
