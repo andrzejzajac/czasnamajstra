@@ -35,7 +35,7 @@ export default function Footer() {
             <a href={PHONE_HREF} className="footer-link">
               {PHONE}
             </a>
-            <span className="footer-text">Warszawa i okolice</span>
+            <span className="footer-text">Warszawa</span>
           </div>
         </div>
 

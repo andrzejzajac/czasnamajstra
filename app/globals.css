@@ -800,9 +800,9 @@ main {
     height: calc(var(--app-h) - 64px);
   }
 
-  /* у вузькому кадрі зсуваємо фото, щоб було видно лампу */
+  /* у вузькому кадрі зсуваємо фото так, щоб було видно лампу, але не кут стіни справа */
   .home-hero-text .home-hero-photo {
-    object-position: 72% 60%;
+    object-position: 64% 60%;
   }
 
 }
@@ -1366,6 +1366,107 @@ main {
   .lead-form {
     grid-template-columns: minmax(0, 1fr);
     gap: 12px;
+  }
+}
+
+/* ---------- Головна: часті запитання ---------- */
+
+.faq {
+  padding: 96px 0;
+}
+
+.faq-inner {
+  max-width: 1075px;
+  margin: 0 auto;
+}
+
+/* рядки між чорними лініями, як у «Co robimy?» */
+.faq-item {
+  border-top: 1px solid #000;
+}
+
+.faq-item:last-child {
+  border-bottom: 1px solid #000;
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question h3 {
+  margin: 0;
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* плюс, що стає мінусом, коли відповідь відкрита */
+.faq-icon {
+  position: relative;
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: translateY(-50%);
+  transition: transform 0.2s;
+}
+
+.faq-icon::after {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.faq-item[open] .faq-icon::after {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+/* відповідь — на ширину двох колонок сітки */
+.faq-answer {
+  max-width: 700px;
+  margin: 0;
+  padding: 0 0 28px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1107px) {
+  .faq-inner {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .faq {
+    padding: 64px 0;
+  }
+
+  .faq-question {
+    padding: 24px 0;
+  }
+
+  .faq-answer {
+    font-size: 16px;
   }
 }
 

@@ -1,41 +1,13 @@
 "use client";
 
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import { useState } from "react";
-import bazowyPhoto from "../../public/design.avif";
-import premiumPhoto from "../../public/design4.avif";
+import { PACKAGES as packages } from "../lib/packages";
 
 export const PICK_PACKAGE_EVENT = "pick-package";
 
 // Два пакети як картки проєктів: велике фото, назва, ціна за м² і дві кнопки.
-// «Materiały i komponenty» відкриває файл з переліком матеріалів (materials).
-// Поки файлу немає, кнопка «заблокована»: при натисканні коротко червоніє й трясеться.
-// TODO: замінити тимчасові фото на фото відповідних пакетів
-// і вписати materials, коли файли з'являться в public/ (наприклад "/pakiet-bazowy.pdf").
-const packages: {
-  name: string;
-  text: string;
-  price: number;
-  photo: StaticImageData;
-  alt: string;
-  materials?: string;
-}[] = [
-  {
-    name: "Bazowy",
-    text: "Solidne wykończenie pod klucz w stałej cenie.",
-    price: 1000,
-    photo: bazowyPhoto,
-    alt: "Przykładowe wnętrze wykończone w pakiecie Bazowy",
-  },
-  {
-    name: "Premium",
-    text: "Wykończenie z materiałów wyższej klasy.",
-    price: 1500,
-    photo: premiumPhoto,
-    alt: "Przykładowe wnętrze wykończone w pakiecie Premium",
-  },
-];
-
+// Дані пакетів — у app/lib/packages.ts.
 export default function Packages() {
   // пакет, чия «заблокована» кнопка зараз грає анімацію
   const [blocked, setBlocked] = useState<string | null>(null);
@@ -60,7 +32,7 @@ export default function Packages() {
                   alt={p.alt}
                   fill
                   unoptimized
-                  loading="eager"
+                  loading="lazy"
                   sizes="(max-width: 900px) 100vw, 530px"
                 />
               </div>

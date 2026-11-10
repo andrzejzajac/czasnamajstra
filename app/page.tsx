@@ -3,6 +3,7 @@ import design3Photo from "../public/design3.avif";
 import design4Photo from "../public/design4.avif";
 import design5Photo from "../public/design5.avif";
 import heroPhoto from "../public/hero.avif";
+import Faq from "./components/Faq";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HomeHero from "./components/HomeHero";
@@ -11,12 +12,18 @@ import Packages from "./components/Packages";
 import PhotoReveal from "./components/PhotoReveal";
 import Statement from "./components/Statement";
 import WorkTypes from "./components/WorkTypes";
+import { FAQ } from "./lib/faq";
+import { PACKAGES } from "./lib/packages";
+import { faqJsonLd, jsonLdHtml, renovationJsonLd } from "./lib/seo";
 
 // Головна — ремонти помешкань.
-// Порядок: hero з кнопкою заявки → фото робіт → що робимо → пакети → форма заявки.
+// Порядок: hero з кнопкою заявки → фото робіт → що робимо → пакети → форма заявки → часті запитання.
 export default function Home() {
   return (
     <>
+      {/* послуга ремонту й ціни пакетів для Google (schema.org) */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(renovationJsonLd(PACKAGES))} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(faqJsonLd(FAQ))} />
       <Header />
       <main id="main">
         <HomeHero
@@ -42,6 +49,7 @@ export default function Home() {
         <WorkTypes />
         <Packages />
         <LeadForm />
+        <Faq />
       </main>
       <Footer />
     </>
