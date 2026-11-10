@@ -47,12 +47,19 @@ export const metadata: Metadata = {
   },
 };
 
+const APP_HEIGHT_SCRIPT = `(function(){var d=document.documentElement,w=0;function set(){if(window.innerWidth===w)return;w=window.innerWidth;d.style.setProperty("--app-h",window.innerHeight+"px")}set();window.addEventListener("resize",set)})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pl" className={helveticaNeue.variable}>
-      <body>{children}</body>
+    <html lang="pl" className={helveticaNeue.variable} suppressHydrationWarning>
+      <body>
+        {/* фіксуємо висоту екрана в --app-h ще до показу сторінки й оновлюємо лише при зміні ширини
+            (поворот телефона), а не коли браузер ховає чи показує адресний рядок */}
+        <script dangerouslySetInnerHTML={{ __html: APP_HEIGHT_SCRIPT }} />
+        {children}
+      </body>
     </html>
   );
 }

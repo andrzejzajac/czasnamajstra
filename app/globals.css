@@ -1,4 +1,7 @@
 :root {
+  /* висота екрана телефона, зафіксована скриптом у layout.tsx: вона не міняється,
+     коли браузер ховає чи показує свою панель, тож блоки на весь екран не стрибають */
+  --app-h: 100svh;
   /* нейтральна палітра: білий, сірі й темний текст; червоний — тільки кнопки */
   --tint: #e8e8e8;        /* сірий — фон hero */
   --accent: #ff3737;      /* червоний — кнопки */
@@ -153,7 +156,7 @@ body {
 /* ---------- Main ---------- */
 
 main {
-  min-height: calc(100svh - 64px);
+  min-height: calc(var(--app-h) - 64px);
   padding-bottom: 72px;
   background: var(--surface);
 }
@@ -735,7 +738,7 @@ main {
   /* фото на всю ширину екрана, одразу під шапкою */
   width: 100%;
   aspect-ratio: 21 / 9;
-  max-height: calc(100svh - 64px);
+  max-height: calc(var(--app-h) - 64px);
   background: var(--tint);
 }
 
@@ -752,7 +755,7 @@ main {
   align-items: center;
   justify-content: center;
   /* шапка тут схована, тож блок на весь екран */
-  height: 100svh;
+  height: var(--app-h);
   padding: 16px;
   background: #fff;
   color: #000;
@@ -767,7 +770,7 @@ main {
 /* запас прокрутки, поки блок закріплений */
 @media (prefers-reduced-motion: no-preference) {
   .statement {
-    height: 300svh;
+    height: calc(var(--app-h) * 3);
     /* блок, що їде вгору повільніше, не вилазить за свої межі */
     overflow: clip;
   }
@@ -794,7 +797,7 @@ main {
   /* hero з текстом — на весь екран під шапкою */
   .home-hero-text {
     aspect-ratio: auto;
-    height: calc(100svh - 64px);
+    height: calc(var(--app-h) - 64px);
   }
 
   /* у вузькому кадрі зсуваємо фото, щоб було видно лампу */
@@ -1059,7 +1062,7 @@ main {
 
 .reveal-base {
   position: relative;
-  height: 100svh;
+  height: var(--app-h);
 }
 
 .reveal-panels {
@@ -1079,13 +1082,13 @@ main {
 @media (prefers-reduced-motion: no-preference) and (min-width: 641px) {
   /* запас прокрутки, поки фото затримане на екрані */
   .reveal {
-    height: 260svh;
+    height: calc(var(--app-h) * 2.6);
   }
 
   .reveal-stage {
     position: sticky;
     top: 0;
-    height: 100svh;
+    height: var(--app-h);
     overflow: hidden;
   }
 
@@ -1097,7 +1100,7 @@ main {
   .reveal-panel {
     aspect-ratio: auto;
     /* до першого оновлення фото чекають нижче екрана */
-    transform: translateY(100svh);
+    transform: translateY(var(--app-h));
   }
 }
 

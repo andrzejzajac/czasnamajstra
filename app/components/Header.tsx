@@ -24,7 +24,7 @@ export default function Header() {
     const update = () => {
       frame = 0;
       const { top, bottom } = zone.getBoundingClientRect();
-      const hidden = top <= header.offsetHeight && bottom > window.innerHeight;
+      const hidden = top <= header.offsetHeight && bottom > (parseFloat(document.documentElement.style.getPropertyValue("--app-h")) || window.innerHeight);
       header.classList.toggle("header-hidden", hidden);
     };
     const onScroll = () => {
