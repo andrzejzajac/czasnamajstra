@@ -25,16 +25,33 @@ const helveticaNeue = localFont({
   display: "swap",
 });
 
+const SITE_URL = "https://czasnamajstra.com";
+const DESCRIPTION =
+  "Remonty i wykończenia mieszkań pod klucz w Warszawie i okolicach. Pomiar, wycena przed rozpoczęciem prac, realizacja i odbiór. Zadzwoń: +48 793 651 242.";
+
 export const metadata: Metadata = {
-  title: "Czas na Majstra",
-  description: "",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Czas na Majstra — remonty i wykończenia mieszkań w Warszawie",
+    template: "%s — Czas na Majstra",
+  },
+  description: DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "pl_PL",
+    url: SITE_URL,
+    siteName: "Czas na Majstra",
+    title: "Czas na Majstra — remonty i wykończenia mieszkań w Warszawie",
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="uk" className={helveticaNeue.variable}>
+    <html lang="pl" className={helveticaNeue.variable}>
       <body>{children}</body>
     </html>
   );

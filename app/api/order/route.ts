@@ -10,6 +10,8 @@ function escapeHtml(text: string) {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function POST(request: Request) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -20,13 +22,15 @@ export async function POST(request: Request) {
 
   const form = await request.formData();
   const problem = String(form.get("problem") ?? "").trim().slice(0, MAX_PROBLEM_LENGTH);
-  const phone = String(form.get("phone") ?? "").trim().slice(0, 32);
+  // контакт — телефон або e-mail (у формі на головній можна вписати будь-що з двох)
+  const phone = String(form.get("phone") ?? "").trim().slice(0, 100);
+  const isEmail = EMAIL_RE.test(phone);
   const files = form
     .getAll("files")
     .filter((f): f is File => f instanceof File && f.size > 0)
     .slice(0, MAX_FILES);
 
-  if (!problem || phone.replace(/\D/g, "").length < 9) {
+  if (!problem || (!isEmail && phone.replace(/\D/g, "").length < 9)) {
     return NextResponse.json({ error: "invalid" }, { status: 400 });
   }
 
@@ -34,7 +38,7 @@ export async function POST(request: Request) {
     "🔧 <b>Nowe zgłoszenie</b>",
     "",
     `<b>Opis:</b> ${escapeHtml(problem)}`,
-    `<b>Telefon:</b> ${escapeHtml(phone)}`,
+    `<b>${isEmail ? "E-mail" : "Telefon"}:</b> ${escapeHtml(phone)}`,
     files.length ? `<b>Pliki:</b> ${files.length}` : "<b>Pliki:</b> brak",
   ].join("\n");
 

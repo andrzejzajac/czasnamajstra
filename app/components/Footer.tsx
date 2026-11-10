@@ -1,13 +1,14 @@
+import Link from "next/link";
 import Logo from "./Logo";
 import SocialIcons from "./SocialIcons";
 
 const PHONE = "+48 793 651 242";
 const PHONE_HREF = "tel:+48793651242";
 
+// ті самі пункти, що й у шапці
 const links = [
-  { label: "Usługi", href: "#uslugi" },
-  { label: "Ceny", href: "#ceny" },
-  { label: "Opłata", href: "#oplata" },
+  { label: "Remonty", href: "/" },
+  { label: "Usługi", href: "/uslugi" },
 ];
 
 export default function Footer() {
@@ -16,17 +17,17 @@ export default function Footer() {
       <div className="footer-inner">
         <div className="footer-top">
           <div className="footer-brand">
-            <a href="/" className="footer-home" aria-label="Czas na Majstra — strona główna">
-              <Logo />
-            </a>
+            <Link href="/" className="footer-home" aria-label="Czas na Majstra — strona główna">
+              <Logo mark />
+            </Link>
             <SocialIcons />
           </div>
 
           <nav className="footer-col" aria-label="Меню у футері">
             {links.map((link) => (
-              <a key={link.href} href={link.href} className="footer-link">
+              <Link key={link.href} href={link.href} className="footer-link">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -39,7 +40,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          © {new Date().getFullYear()} Czas na Majstra
+          © {new Date().getFullYear()} czasnamajstra.com. Wszelkie prawa zastrzeżone.
         </div>
       </div>
     </footer>
