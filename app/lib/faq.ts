@@ -13,7 +13,7 @@ export const FAQ: { question: string; answer: string }[] = [
   {
     question: "Czy cena za m² obejmuje materiały?",
     answer:
-      "Tak, w pakietach Bazowy i Premium materiały są wliczone w cenę. Różnią się klasą materiałów — szczegóły pokazujemy przed rozpoczęciem prac.",
+      "Tak, w pakietach Standard i Premium materiały są wliczone w cenę. Różnią się klasą materiałów — szczegóły pokazujemy przed rozpoczęciem prac.",
   },
   {
     question: "Jak wygląda współpraca?",
