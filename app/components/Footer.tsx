@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="footer-top">
           <div className="footer-brand">
             <Link href="/" className="footer-home" aria-label="Czas na Majstra — strona główna">
-              <Logo mark />
+              <Logo />
             </Link>
             <SocialIcons />
           </div>
