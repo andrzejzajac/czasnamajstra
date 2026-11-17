@@ -7,10 +7,10 @@ const PHONE = "+48 793 651 242";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Фінальна заявка: лише контакт (телефон або e-mail) і коментар — менше полів, більше заявок.
-// Пакет, обраний кнопкою в блоці «Pakiety», непомітно додається до заявки.
 // Надсилається на /api/order, а сервер пересилає її в Telegram-бот.
 export default function LeadForm() {
   const [contact, setContact] = useState("");
+  // пакет, обраний кнопкою в блоці «Pakiety», непомітно додається до заявки
   const [pack, setPack] = useState("");
   const [details, setDetails] = useState("");
   const [sending, setSending] = useState(false);

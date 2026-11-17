@@ -15,7 +15,7 @@ const helveticaNeue = localFont({
 });
 
 const DESCRIPTION =
-  "Remonty i wykończenia mieszkań pod klucz w Warszawie. Pomiar, wycena przed rozpoczęciem prac, realizacja i odbiór. Zadzwoń: +48 793 651 242.";
+  "Remonty i wykończenia mieszkań pod klucz w Warszawie od 1000 zł/m². Pomiar, wycena przed rozpoczęciem prac, realizacja i odbiór. Zadzwoń: +48 793 651 242.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

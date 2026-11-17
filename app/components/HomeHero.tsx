@@ -10,6 +10,7 @@ export default function HomeHero({
   title,
   text,
   cta,
+  price,
   first = false,
 }: {
   id?: string;
@@ -18,6 +19,8 @@ export default function HomeHero({
   title?: string;
   text?: string;
   cta?: { label: string; href: string };
+  /** орієнтовна ціна, наприклад «od 1400 zł/m²» — показується над кнопкою */
+  price?: React.ReactNode;
   first?: boolean;
 }) {
   const Heading = first ? "h1" : "h2";
@@ -42,6 +45,7 @@ export default function HomeHero({
           </Heading>
           <div className="intro-side">
             <p className="intro-text">{text}</p>
+            {price && <p className="intro-price">{price}</p>}
             {cta && (
               <a href={cta.href} className="button">
                 <span>{cta.label}</span>

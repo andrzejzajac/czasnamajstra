@@ -13,16 +13,15 @@ import PhotoReveal from "./components/PhotoReveal";
 import Statement from "./components/Statement";
 import WorkTypes from "./components/WorkTypes";
 import { FAQ } from "./lib/faq";
-import { PACKAGES } from "./lib/packages";
-import { faqJsonLd, jsonLdHtml, renovationJsonLd } from "./lib/seo";
+import { faqJsonLd, jsonLdHtml, PRICE_FROM, renovationJsonLd } from "./lib/seo";
 
 // Головна — ремонти помешкань.
 // Порядок: hero з кнопкою заявки → фото робіт → що робимо → пакети → форма заявки → часті запитання.
 export default function Home() {
   return (
     <>
-      {/* послуга ремонту й ціни пакетів для Google (schema.org) */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(renovationJsonLd(PACKAGES))} />
+      {/* послуга ремонту для Google (schema.org) */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(renovationJsonLd)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(faqJsonLd(FAQ))} />
       <Header />
       <main id="main">
@@ -33,6 +32,11 @@ export default function Home() {
           alt="Wyremontowana sypialnia z łóżkiem i lampką na szafce nocnej"
           title="Wykończenia wnętrz pod klucz"
           text="Zajmujemy się całym remontem — od pierwszego pomiaru po gotowe mieszkanie."
+          price={
+            <>
+              od {PRICE_FROM} zł/m<sup>2</sup>
+            </>
+          }
           cta={{ label: "Umów pomiar", href: "#wycena" }}
         />
         <div className="hide-header-zone">

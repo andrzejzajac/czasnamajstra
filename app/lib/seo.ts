@@ -1,9 +1,13 @@
 // Спільні дані фірми для SEO: адреса сайту, контакти і розмітка schema.org (JSON-LD),
 // з якої Google розуміє, що це місцева ремонтна фірма у Варшаві.
+import { PACKAGES } from "./packages";
 
 export const SITE_URL = "https://czasnamajstra.com";
 export const SITE_NAME = "Czas na Majstra";
 export const PHONE = "+48 793 651 242";
+
+// Найнижча ціна «від» за м² серед пакетів — показується на першому екрані й у даних для Google.
+export const PRICE_FROM = Math.min(...PACKAGES.map((p) => p.price));
 
 // Райони Варшави, де працюємо.
 export const DISTRICTS = [
@@ -35,7 +39,7 @@ export const businessJsonLd = {
       description:
         "Remonty i wykończenia mieszkań pod klucz oraz drobne naprawy w Warszawie.",
       telephone: "+48793651242",
-      priceRange: "od 1000 zł/m²",
+      priceRange: `od ${PRICE_FROM} zł/m²`,
       currenciesAccepted: "PLN",
       address: {
         "@type": "PostalAddress",
@@ -63,36 +67,34 @@ export const businessJsonLd = {
   ],
 };
 
-// Ремонт під ключ і пакети з ціною за м² — для головної.
-export function renovationJsonLd(packages: { name: string; text: string; price: number }[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": `${SITE_URL}/#remonty`,
-    name: "Remonty i wykończenia mieszkań pod klucz",
-    serviceType: "Remont mieszkania",
-    provider: { "@id": BUSINESS_ID },
-    areaServed: { "@type": "City", name: "Warszawa" },
-    url: SITE_URL,
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Pakiety wykończenia",
-      itemListElement: packages.map((p) => ({
-        "@type": "Offer",
-        name: `Pakiet ${p.name}`,
-        description: p.text,
+// Ремонт під ключ — для головної: пакети з ціною «від» за м², точна ціна — після заміру.
+export const renovationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${SITE_URL}/#remonty`,
+  name: "Remonty i wykończenia mieszkań pod klucz",
+  serviceType: "Remont mieszkania",
+  provider: { "@id": BUSINESS_ID },
+  areaServed: { "@type": "City", name: "Warszawa" },
+  url: SITE_URL,
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Pakiety remontowe",
+    itemListElement: PACKAGES.map((p) => ({
+      "@type": "Offer",
+      name: p.name,
+      description: p.text,
+      priceCurrency: "PLN",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        minPrice: p.price,
         priceCurrency: "PLN",
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          minPrice: p.price,
-          priceCurrency: "PLN",
-          unitCode: "MTK",
-          unitText: "m²",
-        },
-      })),
-    },
-  };
-}
+        unitCode: "MTK",
+        unitText: "m²",
+      },
+    })),
+  },
+};
 
 // Дрібні послуги — для сторінки /uslugi.
 export const repairsJsonLd = {

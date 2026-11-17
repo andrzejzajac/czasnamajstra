@@ -1,32 +1,29 @@
 import type { StaticImageData } from "next/image";
-import standardPhoto from "../../public/design.avif";
-import premiumPhoto from "../../public/design4.avif";
+import fullPhoto from "../../public/design.avif";
+import noDemolitionPhoto from "../../public/design4.avif";
 
-// Пакети ремонту — одне джерело і для блоку «Pakiety», і для SEO-розмітки цін.
-// «Materiały i komponenty» відкриває файл з переліком матеріалів (materials).
-// Поки файлу немає, кнопка «заблокована»: при натисканні коротко червоніє й трясеться.
-// TODO: замінити тимчасові фото на фото відповідних пакетів
-// і вписати materials, коли файли з'являться в public/ (наприклад "/pakiet-standard.pdf").
+// Пакети ремонту — одне джерело для блоку «Pakiety», FAQ і SEO-розмітки цін.
+// TODO: замінити тимчасові фото на фото відповідних робіт.
 export const PACKAGES: {
   name: string;
   text: string;
+  /** ціна «від» за м² */
   price: number;
   photo: StaticImageData;
   alt: string;
-  materials?: string;
 }[] = [
   {
-    name: "Standard",
-    text: "Solidne wykończenie pod klucz w stałej cenie.",
+    name: "Bez demontażu",
+    text: "Wykończenie bez skuwania starych warstw — np. mieszkanie od dewelopera.",
     price: 1000,
-    photo: standardPhoto,
-    alt: "Przykładowe wnętrze wykończone w pakiecie Standard",
+    photo: noDemolitionPhoto,
+    alt: "Przykładowe wnętrze po remoncie bez demontażu",
   },
   {
-    name: "Premium",
-    text: "Wykończenie z materiałów wyższej klasy.",
-    price: 1500,
-    photo: premiumPhoto,
-    alt: "Przykładowe wnętrze wykończone w pakiecie Premium",
+    name: "Pełny remont",
+    text: "Kompleksowy remont z demontażem — od skucia po gotowe mieszkanie.",
+    price: 1450,
+    photo: fullPhoto,
+    alt: "Przykładowe wnętrze po pełnym remoncie",
   },
 ];
