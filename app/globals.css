@@ -669,6 +669,10 @@ main {
 .statement .home-title {
   position: relative;
   max-width: 900px;
+  /* запас зверху під наголоси (Ń, Ś): під час анімації браузер малює текст окремим шаром
+     і інколи обрізає те, що виходить за рядок; від'ємний margin зберігає положення тексту */
+  margin-top: -0.25em;
+  padding-top: 0.25em;
   color: inherit;
 }
 

@@ -2,25 +2,25 @@
 
 import Image, { type StaticImageData } from "next/image";
 import { useState } from "react";
-import designPhoto from "../../public/design.avif";
 import design3Photo from "../../public/design3.avif";
-import design4Photo from "../../public/design4.avif";
-import heroPhoto from "../../public/hero.avif";
+import pomiarPhoto from "../../public/pomiar.webp";
+import meblePhoto from "../../public/meble.webp";
+import remontPhoto from "../../public/remont.webp";
 
 // «4 kroki» — 4 етапи роботи як 4 вертикальні фото впритул на всю ширину,
 // на кожному знизу зліва лише номер і назва. При наведенні (ПК) або натисканні (телефон)
 // фото розмивається, а по центру з'являється короткий опис етапу.
 // TODO: замінити тимчасові фото на фото з відповідних етапів (замір, проєкт, ремонт, меблі).
 const works: { title: string; text: string; photo: StaticImageData; alt: string }[] = [
-  { title: "Pomiar", text: "Mierzymy całe mieszkanie.", photo: heroPhoto, alt: "Sypialnia z lampką na szafce nocnej" },
+  { title: "Pomiar", text: "Mierzymy całe mieszkanie.", photo: pomiarPhoto, alt: "Żółta taśma miernicza na czarnym tle" },
   {
     title: "Projekt",
     text: "Tworzymy wizualizacje, rysunki techniczne i kosztorys.",
     photo: design3Photo,
     alt: "Ciemny salon z podświetlonymi półkami",
   },
-  { title: "Remont", text: "Wykonujemy wszystkie prace wykończeniowe.", photo: designPhoto, alt: "Przestronny salon z jadalnią" },
-  { title: "Meble", text: "Dobieramy, zamawiamy i montujemy meble.", photo: design4Photo, alt: "Sypialnia z dużym łóżkiem" },
+  { title: "Remont", text: "Wykonujemy wszystkie prace wykończeniowe.", photo: remontPhoto, alt: "Mieszkanie w trakcie remontu: drabina, wiadra i deski pod ścianą" },
+  { title: "Meble", text: "Dobieramy, zamawiamy i montujemy meble.", photo: meblePhoto, alt: "Fotel z pomarańczową poduszką, pufa i szafka RTV w salonie" },
 ];
 
 export default function WorkTypes() {
