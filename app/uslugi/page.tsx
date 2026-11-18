@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
-import Payment from "../components/Payment";
-import Pricing from "../components/Pricing";
+import HowWeWork from "../components/HowWeWork";
 import Services from "../components/Services";
 import { jsonLdHtml, repairsJsonLd } from "../lib/seo";
 
@@ -29,8 +28,7 @@ export default function NaprawyPage() {
       <main id="main">
         <Hero />
         <Services />
-        <Pricing />
-        <Payment />
+        <HowWeWork />
       </main>
       <Footer />
     </>

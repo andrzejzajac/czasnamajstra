@@ -47,8 +47,10 @@ const APP_HEIGHT_SCRIPT = `(function(){var d=document.documentElement,w=0;functi
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // data-scroll-behavior: Next вимикає плавну прокрутку на час переходу між сторінками,
+  // щоб нова сторінка відкривалась з початку, а не там, де закінчилась плавна прокрутка
   return (
-    <html lang="pl" className={helveticaNeue.variable} suppressHydrationWarning>
+    <html lang="pl" className={helveticaNeue.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
         {/* фіксуємо висоту екрана в --app-h ще до показу сторінки й оновлюємо лише при зміні ширини
             (поворот телефона), а не коли браузер ховає чи показує адресний рядок */}

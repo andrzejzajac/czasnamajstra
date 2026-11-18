@@ -1,8 +1,8 @@
-import designPhoto from "../public/design.avif";
-import design3Photo from "../public/design3.avif";
-import design4Photo from "../public/design4.avif";
-import design5Photo from "../public/design5.avif";
-import heroPhoto from "../public/hero.avif";
+import heroPhoto from "../public/hero-kuchnia-lampy.webp";
+import kuchniaWyspaPhoto from "../public/kuchnia-wyspa.webp";
+import lazienkaPhoto from "../public/lazienka.webp";
+import salonOknaPhoto from "../public/salon-okna.webp";
+import salonWieczorPhoto from "../public/salon-wieczor.webp";
 import Faq from "./components/Faq";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -29,26 +29,25 @@ export default function Home() {
           first
           id="intro-title"
           photo={heroPhoto}
-          alt="Wyremontowana sypialnia z łóżkiem i lampką na szafce nocnej"
+          alt="Biała kuchnia z wiszącymi lampami nad stołem i drewnianą podłogą"
           title="Wykończenia wnętrz pod klucz"
-          text="Zajmujemy się całym remontem — od pierwszego pomiaru po gotowe mieszkanie."
           price={
             <>
               od {PRICE_FROM} zł/m<sup>2</sup>
             </>
           }
-          cta={{ label: "Umów pomiar", href: "#wycena" }}
+          cta={{ label: "Umów się", href: "#wycena" }}
         />
         <div className="hide-header-zone">
           <Statement />
           <PhotoReveal
-            base={{ src: designPhoto, alt: "Przestronny salon z jadalnią i widokiem na ogród" }}
+            base={{ src: salonWieczorPhoto, alt: "Salon wieczorem z jasną sofą, marmurowym stolikiem i świecami" }}
             panels={[
-              { src: design3Photo, alt: "Ciemny salon z podświetlonymi półkami i telewizorem na ścianie" },
-              { src: design4Photo, alt: "Sypialnia z dużym łóżkiem i podświetloną ścianą z fakturą" },
+              { src: lazienkaPhoto, alt: "Łazienka z kabiną walk-in, podświetlanym lustrem i drewnianym sufitem" },
+              { src: kuchniaWyspaPhoto, alt: "Kuchnia z kamienną wyspą, ciemnymi krzesłami i szklaną lampą" },
             ]}
           />
-          <HomeHero photo={design5Photo} alt="Kuchnia z jadalnią, drewnianym stołem i panoramicznymi oknami" />
+          <HomeHero photo={salonOknaPhoto} alt="Jasny salon z narożną sofą i dużymi oknami z widokiem na góry" />
         </div>
         <WorkTypes />
         <Packages />

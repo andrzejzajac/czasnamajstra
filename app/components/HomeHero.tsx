@@ -44,7 +44,7 @@ export default function HomeHero({
             {title}
           </Heading>
           <div className="intro-side">
-            <p className="intro-text">{text}</p>
+            {text && <p className="intro-text">{text}</p>}
             {price && <p className="intro-price">{price}</p>}
             {cta && (
               <a href={cta.href} className="button">

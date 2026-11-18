@@ -493,9 +493,9 @@ main {
 
 /* ---------- Services ---------- */
 
+/* відступи як у заголовків «Pakiety» на головній: по 120px зверху й знизу */
 .services {
-  margin-bottom: 72px;
-  padding: 72px 0;
+  padding: 120px 0;
   background: var(--surface);
   color: var(--ink);
 }
@@ -505,13 +505,12 @@ main {
   margin: 0 auto;
 }
 
-.services-title {
-  margin: 0 0 48px;
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+/* такий самий заголовок, як «Pakiety wykończenia» на головній: великі літери, той самий розмір */
+.services .services-title {
+  margin: 0 0 64px;
+  font-size: clamp(28px, 3.8vw, 52px);
   text-align: center;
+  text-box: trim-both cap alphabetic;
 }
 
 .services-list {
@@ -567,8 +566,8 @@ main {
 }
 
 @media (max-width: 900px) {
-  .services-title {
-    margin-bottom: 32px;
+  .services .services-title {
+    margin-bottom: 48px;
   }
 
   /* 3 в ряд, неповний останній ряд — по центру */
@@ -587,8 +586,7 @@ main {
 
 @media (max-width: 640px) {
   .services {
-    margin-bottom: 40px;
-    padding: 48px 0;
+    padding: 72px 0;
   }
 
   .services-list {
@@ -747,6 +745,11 @@ main {
   object-position: 50% 60%;
 }
 
+/* перше фото: у широкому кадрі тримаємо в центрі лампи й кухонні шафи */
+.home-hero-text .home-hero-photo {
+  object-position: 50% 45%;
+}
+
 /* фраза на весь екран: блок закріплюється на час переходу фону з білого в чорний */
 .statement-pinned {
   position: sticky;
@@ -763,8 +766,15 @@ main {
 }
 
 .statement .home-title {
+  position: relative;
   max-width: 900px;
   color: inherit;
+}
+
+/* коло з чорним градієнтом, що росте від низу по центру (масштаб задає Statement.tsx);
+   стопи відповідають SOFT = 1.2: чорне ядро — 1 / 2.2 радіуса */
+.statement-glow {
+  display: none;
 }
 
 /* запас прокрутки, поки блок закріплений */
@@ -776,7 +786,28 @@ main {
   }
 
   .statement-pinned {
+    overflow: hidden;
     transition: color 0.3s;
+  }
+
+  .statement-glow {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle closest-side,
+      #000 45.5%,
+      rgba(0, 0, 0, 0.7) 61.8%,
+      rgba(0, 0, 0, 0.3) 80.9%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    transform: translate3d(-50%, -50%, 0) scale(0);
+    will-change: transform;
+    pointer-events: none;
   }
 }
 
@@ -785,7 +816,7 @@ main {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 65%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.35) 45%, rgba(0, 0, 0, 0) 75%);
 }
 
 @media (max-width: 640px) {
@@ -800,26 +831,14 @@ main {
     height: calc(var(--app-h) - 64px);
   }
 
-  /* у вузькому кадрі зсуваємо фото так, щоб було видно лампу, але не кут стіни справа */
+  /* у вузькому кадрі тримаємо в центрі лампи й кухню */
   .home-hero-text .home-hero-photo {
-    object-position: 64% 60%;
+    object-position: 35% 50%;
   }
 
 }
 
-/* ---------- Головна: спільна сітка блоків ---------- */
-
-/* усі блоки — на одній сітці з трьох колонок, від лівого краю, той самий заголовок */
-.intro {
-  max-width: 1075px;
-  margin: 0 auto;
-}
-
-.intro {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 35px;
-}
+/* ---------- Головна: заголовок на першому фото ---------- */
 
 .home-title {
   margin: 0;
@@ -832,48 +851,48 @@ main {
   text-wrap: balance;
 }
 
-/* ---------- Головна: короткий опис ---------- */
-
-/* лежить на фото, притиснуто до низу */
+/* мінімум елементів: великий заголовок по центру, під ним в один ряд ціна й кнопка */
 .intro {
   position: absolute;
   z-index: 1;
-  right: 0;
-  bottom: 48px;
-  left: 0;
-  align-items: end;
-}
-
-.intro .home-title,
-.intro .intro-text {
-  color: #fff;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 32px;
+  padding: 0 16px 64px;
+  text-align: center;
 }
 
 .intro .home-title {
-  grid-column: span 2;
+  max-width: 1000px;
+  color: #fff;
+  font-size: clamp(34px, 5.4vw, 80px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
 }
 
 .intro-side {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 24px;
+  align-items: center;
+  gap: 28px;
 }
 
 .intro-text {
   margin: 0;
-  color: #000;
+  color: #fff;
   font-size: 18px;
   line-height: 1.4;
 }
 
-/* орієнтовна ціна на першому екрані */
 .intro-price {
-  margin: -8px 0 0;
+  margin: 0;
   color: #fff;
   font-size: 24px;
   font-weight: 700;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .intro-price sup {
@@ -1003,13 +1022,6 @@ main {
 }
 
 
-@media (max-width: 1107px) {
-  .intro {
-    margin-left: 16px;
-    margin-right: 16px;
-  }
-}
-
 /* на планшеті й телефоні — дві колонки */
 @media (max-width: 900px) {
   .works-list {
@@ -1019,17 +1031,14 @@ main {
 
 @media (max-width: 640px) {
   .intro {
-    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    padding-bottom: 40px;
+  }
+
+  /* на телефоні ціна над кнопкою */
+  .intro-side {
+    flex-direction: column;
     gap: 16px;
-    bottom: 24px;
-  }
-
-  .intro .home-title {
-    grid-column: auto;
-  }
-
-  .intro-text {
-    font-size: 16px;
   }
 
   .section-head {
@@ -1093,11 +1102,25 @@ main {
     top: 0;
     height: var(--app-h);
     overflow: hidden;
+    /* біла рамка, що з'являється, коли фонове фото віддаляється */
+    background: #fff;
+  }
+
+  .reveal-base {
+    will-change: transform, filter, opacity;
   }
 
   .reveal-panels {
     position: absolute;
     inset: 0;
+    /* білі проміжки між фото, як у плитках «4 kroki» */
+    gap: 4px;
+  }
+
+  /* білий проміжок і перед наступним фото */
+  .reveal + .home-hero {
+    margin-top: 0;
+    border-top: 4px solid #fff;
   }
 
   .reveal-panel {
@@ -1214,6 +1237,53 @@ main {
   text-transform: uppercase;
 }
 
+/* короткий опис під назвою (сторінка «Usługi») */
+.package-text {
+  max-width: 420px;
+  margin: 0 0 24px;
+  font-size: 17px;
+  line-height: 1.45;
+  opacity: 0.85;
+}
+
+/* окремі блоки на всю ширину, один під одним (сторінка «Usługi») */
+.packages-list-stacked {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.packages-list-stacked .package {
+  aspect-ratio: 21 / 9;
+  max-height: calc(var(--app-h) - 64px);
+}
+
+/* блок із графікою замість фото: сірий фон, як у верхнього блоку сторінки, текст чорний */
+.package-graphic {
+  background: var(--tint);
+}
+
+.package-graphic .package-body {
+  color: var(--ink);
+}
+
+/* тут немає фото, тож темний перехід знизу не потрібен — інакше верх виглядає сірішим за низ */
+.package-graphic::after {
+  content: none;
+}
+
+/* картинка з прозорим фоном (логотипи оплати) — не обрізається, стоїть вище тексту */
+.package-photo.package-photo-contain {
+  /* займає смугу у верхній частині блоку, над назвою й текстом */
+  top: 10% !important;
+  height: 42% !important;
+  object-fit: contain;
+}
+
+@media (max-width: 640px) {
+  .packages-list-stacked .package {
+    aspect-ratio: 4 / 5;
+  }
+}
+
 .package-price {
   margin: 0 0 24px;
   font-size: 24px;
@@ -1227,110 +1297,88 @@ main {
 
 /* ---------- Головна: заявка на pomiar ---------- */
 
-.packages-inner,
-.lead-inner {
+.packages-inner {
   max-width: 1075px;
   margin: 0 auto;
 }
 
+/* мінімалістичний чорний блок: заголовок по центру, під ним в один ряд поле й червона кнопка */
 .lead {
-  padding: 96px 0;
-  background: #000;
+  padding: 120px 16px;
+  /* ледь помітні вертикальні хвилі; по центру, за заголовком і формою, — чорне кругове затемнення */
+  background:
+    radial-gradient(ellipse 50% 60% at 50% 50%, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0) 100%),
+    #000 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='240'%3E%3Cpath d='M24.0 0 L25.0 4 L26.1 8 L27.1 12 L28.1 16 L29.0 20 L29.9 24 L30.7 28 L31.4 32 L32.1 36 L32.7 40 L33.1 44 L33.5 48 L33.8 52 L33.9 56 L34.0 60 L33.9 64 L33.8 68 L33.5 72 L33.1 76 L32.7 80 L32.1 84 L31.4 88 L30.7 92 L29.9 96 L29.0 100 L28.1 104 L27.1 108 L26.1 112 L25.0 116 L24.0 120 L23.0 124 L21.9 128 L20.9 132 L19.9 136 L19.0 140 L18.1 144 L17.3 148 L16.6 152 L15.9 156 L15.3 160 L14.9 164 L14.5 168 L14.2 172 L14.1 176 L14.0 180 L14.1 184 L14.2 188 L14.5 192 L14.9 196 L15.3 200 L15.9 204 L16.6 208 L17.3 212 L18.1 216 L19.0 220 L19.9 224 L20.9 228 L21.9 232 L23.0 236 L24.0 240' fill='none' stroke='white' stroke-opacity='0.06' stroke-width='1.5'/%3E%3C/svg%3E") center / 48px 240px;
   color: #fff;
+  text-align: center;
 }
 
-.lead .home-title {
+.lead-title {
+  margin: 0 0 48px;
   color: #fff;
+  font-size: clamp(28px, 3.8vw, 52px);
+  text-box: trim-both cap alphabetic;
 }
 
-/* форма — один рядок на сітці сайту: два поля-плитки й кнопка, однакової висоти */
 .lead-form {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-/* поле — темна плитка: маленький підпис зверху, текст під ним */
-.lead-field {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
-  padding: 18px 20px;
-  background: #1a1a1a;
-  cursor: text;
-  transition: background-color 0.15s;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
-.lead-field:hover {
-  background: #222;
-}
-
-/* фокус — плитка світлішає й отримує білу рамку */
-.lead-field:focus-within {
-  background: #262626;
-  box-shadow: inset 0 0 0 1px #fff;
-}
-
-.lead-label {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+/* поле — прозоре, з тонкою білою рамкою, тієї ж висоти, що й кнопка */
+.lead-field {
+  flex: 1 1 220px;
+  display: block;
 }
 
 .lead-field input {
   width: 100%;
+  height: 56px;
   margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.06);
   color: #fff;
   font-family: inherit;
   font-size: 18px;
   outline: none;
+  transition: border-color 0.15s;
+}
+
+.lead-field input:hover,
+.lead-field input:focus {
+  border-color: #fff;
 }
 
 .lead-field input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .lead-submit {
-  height: auto;
-  min-height: 56px;
   border: 0;
   cursor: pointer;
 }
 
+/* поки ім'я й телефон не вписані — кнопка бліда й не натискається */
 .lead-submit:disabled {
-  opacity: 0.5;
-  cursor: wait;
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .lead-error {
-  grid-column: 1 / -1;
-  margin: 0;
-  color: var(--accent);
+  flex-basis: 100%;
+  margin: 16px 0 0;
+  color: #fff;
   font-size: 16px;
 }
 
-/* після відправки подяка займає весь чорний блок і стоїть по центру по висоті */
-.lead-sent {
-  display: flex;
-  align-items: center;
-}
-
-.lead-sent .lead-inner {
-  flex: 1;
-}
-
-.lead-done {
-  margin: 0;
-}
-
 @media (max-width: 1107px) {
-  .packages-inner,
-  .lead-inner {
+  .packages-inner {
     padding: 0 16px;
   }
 }
@@ -1356,12 +1404,35 @@ main {
   }
 
   .lead {
-    padding: 64px 0;
+    padding: 56px 16px;
   }
 
+  .lead-title {
+    margin-bottom: 24px;
+  }
+
+  /* на телефоні поля й кнопка одне під одним, компактніші й вужчі за екран */
   .lead-form {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
+    gap: 6px;
+    max-width: 280px;
+  }
+
+  .lead-field,
+  .lead-submit {
+    flex-basis: 100%;
+  }
+
+  .lead-field input {
+    height: 44px;
+    padding: 0 14px;
+    /* 16px — менше iPhone збільшує сторінку при фокусі */
+    font-size: 16px;
+  }
+
+  .lead-submit {
+    height: 44px;
+    min-height: 0;
+    font-size: 14px;
   }
 }
 
@@ -1385,26 +1456,59 @@ main {
   border-bottom: 1px solid #000;
 }
 
+.faq-heading {
+  margin: 0;
+}
+
 .faq-question {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  width: 100%;
   padding: 28px 0;
-  cursor: pointer;
-  list-style: none;
-}
-
-.faq-question::-webkit-details-marker {
-  display: none;
-}
-
-.faq-question h3 {
-  margin: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: inherit;
   font-size: clamp(20px, 2.4vw, 28px);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.01em;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* відповідь плавно розгортається: рядок сітки росте від 0 до висоти тексту */
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.faq-open .faq-panel {
+  grid-template-rows: 1fr;
+}
+
+.faq-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.faq-panel .faq-answer {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.faq-open .faq-panel .faq-answer {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-panel,
+  .faq-panel .faq-answer {
+    transition: none;
+  }
 }
 
 /* плюс, що повертається на 45° і стає хрестиком, коли відповідь відкрита */
@@ -1413,7 +1517,7 @@ main {
   flex: none;
   width: 20px;
   height: 20px;
-  transition: transform 0.2s;
+  transition: transform 0.35s ease;
 }
 
 .faq-icon::before,
@@ -1432,7 +1536,7 @@ main {
   transform: translateY(-50%) rotate(90deg);
 }
 
-.faq-item[open] .faq-icon {
+.faq-open .faq-icon {
   transform: rotate(45deg);
 }
 

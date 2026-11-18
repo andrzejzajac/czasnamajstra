@@ -24,6 +24,8 @@ export async function POST(request: Request) {
   const problem = String(form.get("problem") ?? "").trim().slice(0, MAX_PROBLEM_LENGTH);
   // контакт — телефон або e-mail (у формі на головній можна вписати будь-що з двох)
   const phone = String(form.get("phone") ?? "").trim().slice(0, 100);
+  // ім'я — з форми на головній (у старих формах його немає)
+  const name = String(form.get("name") ?? "").trim().slice(0, 80);
   const isEmail = EMAIL_RE.test(phone);
   const files = form
     .getAll("files")
@@ -37,6 +39,7 @@ export async function POST(request: Request) {
   const text = [
     "🔧 <b>Nowe zgłoszenie</b>",
     "",
+    ...(name ? [`<b>Imię:</b> ${escapeHtml(name)}`] : []),
     `<b>Opis:</b> ${escapeHtml(problem)}`,
     `<b>${isEmail ? "E-mail" : "Telefon"}:</b> ${escapeHtml(phone)}`,
     files.length ? `<b>Pliki:</b> ${files.length}` : "<b>Pliki:</b> brak",

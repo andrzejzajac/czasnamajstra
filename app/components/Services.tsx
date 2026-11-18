@@ -28,7 +28,7 @@ export default function Services() {
   return (
     <section id="uslugi" className="services" aria-labelledby="services-title">
       <div className="services-inner">
-        <h2 id="services-title" className="services-title">
+        <h2 id="services-title" className="home-title services-title">
           Usługi
         </h2>
         <ul className="services-list">
