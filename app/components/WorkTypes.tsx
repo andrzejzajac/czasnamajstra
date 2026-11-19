@@ -12,7 +12,7 @@ import remontPhoto from "../../public/remont.webp";
 // фото розмивається, а по центру з'являється короткий опис етапу.
 // TODO: замінити тимчасові фото на фото з відповідних етапів (замір, проєкт, ремонт, меблі).
 const works: { title: string; text: string; photo: StaticImageData; alt: string }[] = [
-  { title: "Pomiar", text: "Mierzymy całe mieszkanie.", photo: pomiarPhoto, alt: "Żółta taśma miernicza na czarnym tle" },
+  { title: "Pomiar", text: "Mierzymy całe mieszkanie.", photo: pomiarPhoto, alt: "Rozwinięta żółta miarka w dłoni" },
   {
     title: "Projekt",
     text: "Tworzymy wizualizacje, rysunki techniczne i kosztorys.",
